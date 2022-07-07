@@ -21,6 +21,7 @@ window.addEventListener("load", function() {
             alert("All fields are required!");
             event.preventDefault();
         } else {
+            event.preventDefault();
             formSubmission(status, list, pilot, copilot, fuelLevel, cargoLevel);
         }
 
