@@ -12,6 +12,7 @@ window.addEventListener("load", function() {
     let fuelLevel = document.querySelector("input[name=fuelLevel]");
     let cargoLevel = document.querySelector("input[name=cargoMass]");
     let list = document.getElementById("faultyItems");
+    let status = document.getElementById("launchStatus");
     
     //Calls formSubmission function whenever the submit button is clicked
     form.addEventListener("submit", function(event) {
@@ -20,7 +21,7 @@ window.addEventListener("load", function() {
             alert("All fields are required!");
             event.preventDefault();
         } else {
-            formSubmission(form, list, pilot, copilot, fuelLevel, cargoLevel);
+            formSubmission(status, list, pilot, copilot, fuelLevel, cargoLevel);
         }
 
     });
@@ -40,4 +41,3 @@ window.addEventListener("load", function() {
    
 
 });
-
