@@ -18,40 +18,60 @@ function addDestinationInfo(document, name, diameter, star, distance, moons, ima
 
 function validateInput(testInput) {
     //Checking to see if the input is a number, not a number, or an empty string.
-    console.log(testInput.value)
-    if (Number(testInput.value) === Number) {
+    console.log(testInput)
+    if (Number(testInput) === Number) {
         return "Is a Number";
-    } else if (isNaN(testInput.value)) {
+    } else if (isNaN(testInput)) {
         return "Not a Number";
-    } else if (testInput.value === "") {
+    } else if (testInput === "") {
         return "Empty";
     }
 
 }
 
-function formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel) {
-   event.preventDefault();
-    //Checking to make sure the input is valid.
-    if (validateInput(pilot) === "Not a Number") {
-        document.getElementById("pilotStatus").innerHTML = `1. Pilot ${pilot} is ready for launch.`
-    } else {
-        alert("Invalid pilot name. Try again.")
+function formSubmission(status, list, pilot, copilot, fuelLevel, cargoLevel) {
+   
+    //Checking pilot input field and updating list.
+    if (validateInput(pilot.value) === "Not a Number") {
+        list.style.visibility = "visible";
+        document.getElementById("pilotStatus").innerHTML = `1. Pilot ${pilot.value} is ready for launch.`;
+    } else if (validateInput(pilot.value) === "Is a Number") {
+        alert("Pilot name cannot be a number. Try again.");
     }
-
-    if (validateInput(copilot) === "Not a Number") {
-        document.getElementById("copilotStatus").innerHTML = `1. Co-Pilot ${copilot} is ready for launch.`
-    } else {
-        alert("Invalid co-pilot name. Try again.")
+    //Checking co-pilot input field and updating list.
+    if (validateInput(copilot.value) === "Not a Number") {
+        list.style.visibility = "visible";
+        document.getElementById("copilotStatus").innerHTML = `2. Co-Pilot ${copilot.value} is ready for launch.`;
+    } else if (validateInput(copilot.value) === "Is a Number"){
+        alert("Co-pilot name cannot be a number. Try again.");
     }
-
-    if (validateInput(fuelLevel) === "Not a Number" || validateInput(fuelLevel) === "Empty") {
+    //Checking fuel level input field and updating list.
+    if (validateInput(fuelLevel.value) === "Not a Number" || validateInput(fuelLevel.value) === "Empty") {
         alert("Invalid fuel level. Try again.");
     } else if (fuelLevel < 10000) {
-
+        list.style.visibility = "visible";
+        document.getElementById("fuelStatus").innerHTML = "3. Fuel level is too low for launch.";
+        status.innerHTML = "Shuttle not ready for launch.";
+        status.style.color = "red";
+    } else {
+        list.style.visibility = "visible";
+    }
+    //Checking cargo level input field and updating list.
+    if (validateInput(cargoLevel.value) === "Not a Number" || validateInput(cargoLevel.value) === "Empty") {
+        alert("Invalid cargo mass. Try again.");
+    } else if (cargoLevel > 10000) {
+        list.style.visibility = "visible";
+        document.getElementById("cargoStatus").innerHTML = "4. Cargo mass is too high for launch.";
+        status.innerHTML = "Shuttle not ready for launch.";
+        status.style.color = "red";
+    } else {
+        list.style.visibility = "visible";
     }
 
-    if (validateInput(cargoLevel) === "Not a Number" || validateInput(cargoLevel) === "Empty") {
-        alert("Invalid cargo mass. Try again.");
+    if (fuelLevel >= 10000 && cargoLevel <= 10000) {
+        list.style.visibility = "visible";
+        status.innerHTML = "Shuttle is ready for launch!";
+        status.style.color = "green";
     }
 
 }

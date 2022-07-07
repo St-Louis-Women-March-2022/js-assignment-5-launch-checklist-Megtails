@@ -3,20 +3,28 @@
 //const { formSubmission } = require("./scriptHelper"); PUT THIS BACK!!!
 
 window.addEventListener("load", function() {
-    //Grabbed the input for each of these fields and assigned them to a variable
+    
+    //My DOM variables:
+    //const submitButton = document.getElementById("formSubmit")
+    const form = document.querySelector("form");
     let pilot = document.querySelector("input[name=pilotName]");
     let copilot = document.querySelector("input[name=copilotName]");
     let fuelLevel = document.querySelector("input[name=fuelLevel]");
     let cargoLevel = document.querySelector("input[name=cargoMass]");
     let list = document.getElementById("faultyItems");
-   // let doc = document.getElementById("launchStatus");
- 
-    /*if (pilot.value === "" || copilot.value === "" || fuelLevel.value === "" || cargoLevel.value === "") {
-        alert("All fields are required!");
-    }*/
-
+    
     //Calls formSubmission function whenever the submit button is clicked
-    document.getElementById("formSubmit").addEventListener("click", formSubmission(document, list, pilot, copilot, fuelLevel, cargoLevel));
+    form.addEventListener("submit", function(event) {
+ 
+        if (pilot.value === "" || copilot.value === "" || fuelLevel.value === "" || cargoLevel.value === "") {
+            alert("All fields are required!");
+            event.preventDefault();
+        } else {
+            formSubmission(form, list, pilot, copilot, fuelLevel, cargoLevel);
+        }
+
+    });
+    
 
    /*let listedPlanets;
    // Set listedPlanetsResponse equal to the value returned by calling myFetch()
