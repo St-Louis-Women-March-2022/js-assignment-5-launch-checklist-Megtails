@@ -1,5 +1,5 @@
 // Write your helper functions here!
-//require('isomorphic-fetch');
+require('isomorphic-fetch');
 
 function addDestinationInfo(name, diameter, star, distance, moons, imageUrl) {
     // Here is the HTML formatting for our mission target div.
@@ -91,16 +91,13 @@ function formSubmission(status, list, pilot, copilot, fuelLevel, cargoLevel) {
 
 
 async function myFetch() {
-    let planetsReturned;
 
-    planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
-        response.json().then(function (json) {
-            // Figure out what to put here.
-        });
-    });
+    let planetsReturned = await fetch("https://handlers.education.launchcode.org/static/planets.json");
+    const data = await planetsReturned.json();
 
-    return planetsReturned;
-}
+    return data;
+};
+
 
 //Creates a function to select a random index of an array of values.
 function pickPlanet(planets) {
@@ -111,10 +108,9 @@ function pickPlanet(planets) {
     return randomPlanet;
 }
 
-/*
+
 module.exports.addDestinationInfo = addDestinationInfo;
 module.exports.validateInput = validateInput;
 module.exports.formSubmission = formSubmission;
 module.exports.pickPlanet = pickPlanet;
 module.exports.myFetch = myFetch;
-*/
